@@ -5,10 +5,10 @@
 #apparently putting in like this creates the same effect as if you phsyically put it inside the module
 #even though it's not, its in a seprate file
 #hiiiii
-class ABCDistill::CLI
+class Abcdistill::CLI
 
   def initialize
-    ABCDistill::Genre.addthegenres()
+    Abcdistill::Genre.addthegenres()
     #if u add too much at initalize, it slows down the app. but i think here it take same amount either way
   end
 
@@ -22,7 +22,7 @@ class ABCDistill::CLI
   end
 
   def list_genres
-    ABCDistill::Genre.list_genre_names()
+    Abcdistill::Genre.list_genre_names()
     end
 
 
@@ -38,9 +38,9 @@ class ABCDistill::CLI
     puts genre.name
     puts genre.genrelink
     #scrape the books with scraper tool
-    ABCDistill::Scraper.new.books_in_genre(genre)
+    Abcdistill::Scraper.new.books_in_genre(genre)
     #display the books:
-    ABCDistill::Genre.display_books_of_genre(genre)
+    Abcdistill::Genre.display_books_of_genre(genre)
 
   end
 
@@ -68,12 +68,12 @@ class ABCDistill::CLI
 
       if input.to_i > 0 && input.to_i < 16 #we're strict so we don't run into nil error
         #figure out what book the user chose:
-        book = ABCDistill::Genre.books_of_genre(genre)[input.to_i - 1]
+        book = Abcdistill::Genre.books_of_genre(genre)[input.to_i - 1]
         puts "the book we think the user chose is: #{book.title}"
         # Distill::Genre.display_books_of_genre called in display_books_in_genre actually uses this method above to get its list before it display, so the order should be the same
         #that is, unless there was a change in the moment jsut before. which shouldn't happen. becasue this app doesn't update anything automatically on itself
         #fetch more details on that book:
-          ABCDistill::Scraper.new.book_detail(book)
+          Abcdistill::Scraper.new.book_detail(book)
           #this should update the book with more details
         #display the book pseudo code:
           display_book_detail(book)
@@ -98,9 +98,9 @@ end #end method
     while input != "quit"
       input = gets.strip
 
-      if input.to_i > 0 && input.to_i < ABCDistill::Genre.all.size
+      if input.to_i > 0 && input.to_i < Abcdistill::Genre.all.size
         #fetch the books in that genre
-        genre = ABCDistill::Genre.all[input.to_i - 1] #returns genre instance
+        genre = Abcdistill::Genre.all[input.to_i - 1] #returns genre instance
         display_books_in_genre(genre)
         process_bookchoice(genre) #this will ask for input and process it
 

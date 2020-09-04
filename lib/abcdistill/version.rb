@@ -1,3 +1,3 @@
-module ABCDistill
+module Abcdistill
   VERSION = "0.1.0"
 end

@@ -1,4 +1,4 @@
-class ABCDistill::Scraper
+class Abcdistill::Scraper
   #scraper is a tool. not an object. so it doesn't store anything in some kind of @@all array
   #i'm gonna make the methods instance methods becuase it feels that way. like u feed it very diff things..
   #idk..
@@ -56,7 +56,7 @@ class ABCDistill::Scraper
     #we want this to create 15 book instsances and make sure they are SAVED
 
     #gatekeeper: to prevent duplicates, check if books in this genre is already fetched.
-    if ABCDistill::Genre.books_of_genre(genre) != [] #cant do truthy falsey because empty array is truthy in ruby
+    if Abcdistill::Genre.books_of_genre(genre) != [] #cant do truthy falsey because empty array is truthy in ruby
       return
     end
 
@@ -72,7 +72,7 @@ class ABCDistill::Scraper
     #i'm fixing it manually because the url can be unreliable. say ...biography vs ...biography/
     #using a split tool can be complicated to deal with edge cases like that
 
-    genre = ABCDistill::Genre.find_genre_by_name(genrename)
+    genre = Abcdistill::Genre.find_genre_by_name(genrename)
     puts "did they find the genre in the list? the name found is #{genre.name}"
     #the genres were already added at the moment CLI class's list_options is called.
     #mostread = doc.css(".bigBoxBody")[1]
@@ -98,10 +98,10 @@ class ABCDistill::Scraper
       title = book.css("img").attribute("alt").value
       booklink = addgoodreadsdotcom(book.attribute("href").value)
       #create a new book instance:
-      ABCDistill::Book.new(title, booklink, genre)
+      Abcdistill::Book.new(title, booklink, genre)
     end
 
-    puts "how many books of this genre is added and recognized: #{ABCDistill::Genre.books_of_genre(genre).size}"
+    puts "how many books of this genre is added and recognized: #{Abcdistill::Genre.books_of_genre(genre).size}"
 
     #puts Distill::Genre.books_of_genre(genre)[0]
     # Distill::Genre.books_of_genre(genre).each  do | book |

@@ -7,7 +7,7 @@ require './lib/abcdistill'
 #that file itself, distill.rb require other stuff surrounding in, inside distill.rb itself
 #so you're not loading these files here(version.rb, cli.rb etc..)
 
-ABCDistill::CLI.new.call()
+Abcdistill::CLI.new.call()
 #Distill::Scraper.new.books_in_genre()
 #Distill::Scraper.new.book_detail(Distill::Book.all[2])
 #puts "hello"

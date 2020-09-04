@@ -1,4 +1,4 @@
-class ABCDistill::Book
+class Abcdistill::Book
   attr_accessor :authorname, :pages, :publishdate, :description, :amazonlink
   attr_reader :title, :link, :genre
   @@all = []
