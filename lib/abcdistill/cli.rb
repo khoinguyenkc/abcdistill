@@ -46,7 +46,7 @@ class Abcdistill::CLI
 
   def display_book_detail(book)
     puts "Title: #{book.title}"
-    puts "Genre: #{book.genre}"
+    puts "Genre: #{book.genre.name}"
     puts "Author: #{book.authorname}"
     puts "Pages: #{book.pages}"
     puts "Publish Date: #{book.publishdate}"
@@ -69,7 +69,7 @@ class Abcdistill::CLI
       if input.to_i > 0 && input.to_i < 16 #we're strict so we don't run into nil error
         #figure out what book the user chose:
         book = Abcdistill::Genre.books_of_genre(genre)[input.to_i - 1]
-        puts "the book we think the user chose is: #{book.title}"
+        #puts "the book we think the user chose is: #{book.title}"
         # Distill::Genre.display_books_of_genre called in display_books_in_genre actually uses this method above to get its list before it display, so the order should be the same
         #that is, unless there was a change in the moment jsut before. which shouldn't happen. becasue this app doesn't update anything automatically on itself
         #fetch more details on that book:

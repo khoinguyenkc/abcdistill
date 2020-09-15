@@ -6,7 +6,7 @@ class Abcdistill::Scraper
     #eventually we'll have this take premade book instance (made with title and link)
     #and we'll use the link to scrape other info and fill in.
 
-    html = open('https://www.goodreads.com/book/show/45046808-big-lies-in-a-small-town')
+    html = open(bookinstance.link)
     doc = Nokogiri::HTML(html) #retunrs xml nodeset
 
     authorname = doc.css("a.authorName").text
@@ -64,16 +64,16 @@ class Abcdistill::Scraper
     html = open(genre.genrelink)
     doc = Nokogiri::HTML(html) #retunrs xml nodeset
     genrename = doc.css(".genreHeader h1").text.strip
-    puts "the genrename that was scraped is -#{genrename}-"
+    #puts "the genrename that was scraped is -#{genrename}-"
     if genrename == "Childrens"
       genrename = "Children's"
     end
-    puts "new genrename is #{genrename}"
+    #puts "new genrename is #{genrename}"
     #i'm fixing it manually because the url can be unreliable. say ...biography vs ...biography/
     #using a split tool can be complicated to deal with edge cases like that
 
     genre = Abcdistill::Genre.find_genre_by_name(genrename)
-    puts "did they find the genre in the list? the name found is #{genre.name}"
+    #puts "did they find the genre in the list? the name found is #{genre.name}"
     #the genres were already added at the moment CLI class's list_options is called.
     #mostread = doc.css(".bigBoxBody")[1]
     allbigboxes = doc.css(".coverBigBox")
@@ -86,7 +86,7 @@ class Abcdistill::Scraper
     #the [0] index is not what we want. we just want the [1]
     #mostread only contains one "item" which is the bigboxbody we want
     books = mostread.css(".bookBox a")
-    puts "how many books found in books = mostread.css.... #{books.size}"
+    #puts "how many books found in books = mostread.css.... #{books.size}"
     #this puts is really helpful for debugging. don't remove it
 
     #Distill::Genre.books_of_genre
@@ -101,7 +101,7 @@ class Abcdistill::Scraper
       Abcdistill::Book.new(title, booklink, genre)
     end
 
-    puts "how many books of this genre is added and recognized: #{Abcdistill::Genre.books_of_genre(genre).size}"
+    #puts "how many books of this genre is added and recognized: #{Abcdistill::Genre.books_of_genre(genre).size}"
 
     #puts Distill::Genre.books_of_genre(genre)[0]
     # Distill::Genre.books_of_genre(genre).each  do | book |

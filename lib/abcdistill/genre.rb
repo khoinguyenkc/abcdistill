@@ -1,4 +1,4 @@
-class ABCDistill::Genre
+class Abcdistill::Genre
   attr_reader :name
   attr_accessor :genrelink
  @@all = []
@@ -23,7 +23,7 @@ class ABCDistill::Genre
 end
 
 def self.books_of_genre(genre)
-  ABCDistill::Book.all.select do | book |
+  Abcdistill::Book.all.select do | book |
     book.genre == genre
   end
   #return all books of this genre
